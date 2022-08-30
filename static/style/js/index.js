@@ -57,3 +57,5 @@ function refresh() {
 slider.addEventListener('input', refresh)
 
 getData((slider.valueAsNumber) / 10);
+
+let loop = setInterval(function () { refresh(); }, 5 * 1000);
