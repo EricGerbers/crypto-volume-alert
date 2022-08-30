@@ -6,7 +6,7 @@ name: CI
 # events but only for the master branch
 on:
   schedule:
-     - cron:  '*/30 * * * *'
+     - cron:  '*/2 * * * *'
 jobs:
   updateGraphs:
     runs-on: ubuntu-latest
@@ -38,8 +38,8 @@ jobs:
 
       - name: Update data
         run: |
-          git config --global user.name 'dk4jo3'
-          git config --global user.email 'dk4jo3@users.noreply.github.com'
+          git config --global user.name 'ericgerbers'
+          git config --global user.email 'ericgerbers@users.noreply.github.com'
           git pull
           git commit -am "Update data"
           git push
