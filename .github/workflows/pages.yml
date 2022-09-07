@@ -39,44 +39,6 @@ jobs:
           destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
-  
-  # Report job
-  report-build-status:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    # Specify runner + deployment step
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
-        inputs:
-          emit_telemetry:
-            description: 'Should this action only emit build telemetry instead of deploying the build artifact?'
-            required: false
-            default: "true"
-          token:
-            description: 'GitHub token'
-            default: ${{ github.token }}
-            required: true
-          timeout:
-            description: 'Time in milliseconds after which to timeout and cancel the deployment (default: 10 minutes)'
-            required: false
-            default: "600000"
-          error_count:
-            description: 'Maximum number of status report errors before cancelling a deployment (default: 10)'
-            required: false
-            default: "10"
-          reporting_interval:
-            description: 'Time in milliseconds between two deployment status report (default: 5 seconds)'
-            required: false
-            default: "5000"
-          artifact_name:
-            description: 'Name of the artifact to deploy'
-            required: false
-            default: "github-pages"
         
   # Deployment job
   deploy:
