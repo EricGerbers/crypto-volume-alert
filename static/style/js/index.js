@@ -1,6 +1,19 @@
+function nFormatter(num) {
+  if (num >= 1000000000) {
+    return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+  }
+  if (num >= 1000000) {
+    return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+  }
+  if (num >= 1000) {
+    return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+  }
+  return num;
+}
+
 async function getData(std_cap) {
   const results = await fetch('volumeData.json');
-  const dataObj = _.sortBy(await results.json(), 'ath_change_percentage');
+  const dataObj = _.sortBy(await results.json(), 'last_24hour_volume').reverse();
 
   // get keys and push into a new array, remove the time one, and filter out the ones below std_cap
 
@@ -10,7 +23,7 @@ async function getData(std_cap) {
 
   let ahtObjKeys = Object.keys(dataObj).filter((key) => key !== 'time' && dataObj[key].ath_change_percentage <= -80);
 
-	// let sortDataObj = _.sortBy(dataObj, 'ath_change_percentage');
+  // let sortDataObj = _.sortBy(dataObj, 'ath_change_percentage');
 
   // console.log('newAHT', newAHT);
 
@@ -31,18 +44,20 @@ async function getData(std_cap) {
       }USDT" class="custom-card">
                         <div class="card-body">
                             <h2 class="card-title">${dataObj[key].symbol}</h2>
+														<span>${dataObj[key].fulldata.name}</span>
                             <hr>
                             <h5>${dataObj[key].upper_std}</h5>
                             <p>
                             <span ${dataObj[key].hour >= 0 ? `class="green"` : `class="red"`}>1H : ${
         dataObj[key].hour >= 0 ? `+` : ``
       }${dataObj[key].hour} % </span><br>
-                                            <span ${dataObj[key].day >= 0 ? `class="green"` : `class="red"`}>1D : ${
-        dataObj[key].day >= 0 ? `+` : ``
-      }${dataObj[key].day} % </span><br>
-                                            <span ${dataObj[key].week >= 0 ? `class="green"` : `class="red"`}>1W : ${
-        dataObj[key].week >= 0 ? `+` : ``
-      }${dataObj[key].week} % </span>
+														<span ${dataObj[key].day >= 0 ? `class="green"` : `class="red"`}>1D : ${dataObj[key].day >= 0 ? `+` : ``}${
+        dataObj[key].day
+      } % </span><br>
+														<span ${dataObj[key].week >= 0 ? `class="green"` : `class="red"`}>1W : ${dataObj[key].week >= 0 ? `+` : ``}${
+        dataObj[key].week
+      } % </span>
+														<span>Volum 24h: ${nFormatter(dataObj[key].last_24hour_volume.toFixed(0))}</span>
                             </p>
                         </div>
                     </a>
@@ -60,8 +75,10 @@ async function getData(std_cap) {
       }USDT" class="custom-card">
                         <div class="card-body">
                             <h2 class="card-title">${dataObj[key].symbol}</h2>
+														<span>${dataObj[key].fulldata.name}</span>
                             <hr>
                             <h6>price: $${dataObj[key].fulldata.current_price}</h6>
+														<span>Vol 24h: ${nFormatter(dataObj[key].last_24hour_volume.toFixed(0))}</span>
                             <h5 class="${dataObj[key].ath_change_percentage < 0 ? 'red' : 'blue'}">${
         dataObj[key].ath_change_percentage
       } %</h5>
