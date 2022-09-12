@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Abnormal Crypto Volume Alert</title>
+    <title>Crypto Volume Alert</title>
 
     <!-- Bootstrap -->
     <link href="static/style/css/bootstrap.min.css" rel="stylesheet">
@@ -30,25 +30,43 @@
         <div class="container">
             <div class="row">
                 <div class="header col-md-12">
-                    <h3>Abnomal Crypto Volume Alert</h3>
+                    <h3>Công cụ kiểm tra Volume và mức giảm giá so với ATH</h3>
                 </div>
             </div>
             <div class="d-flex justify-content-center my-4">
                 <div class="slider-div">
-                    <input type="range" class="custom-range" value="20" id="stdSlider" min="0" max="100">
+                    <input type="range" class="custom-range" value="5" id="stdSlider" min="0" max="100">
                 </div>
             </div>
-        
-            <div>
-                <h6>The last 24hr volume is over <span id="stdMulti"></span> times the standard deviation of its historic 24 hr volume (past 90 days)
+
+            <!-- <div>
+                <h6>The last 24hr volume is over times the standard deviation of its historic 24 hr volume (past 90 days)
                 </h6>
-            </div>
+            </div> -->
         </div>
-        
+
         <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h6>Danh sách token có Volume tăng <span id="stdMulti"></span> lần so với 90 ngày trước</h6>
+                </div>
+            </div>
             <div class="row card-row"></div>
         </div>
-        
+        <hr>
+        <div class="container-fluid mt-5">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h6>Danh sách token giảm hơn 80% so với ATH</h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between flex-wrap ath-percent"></div>
+                </div>
+            </div>
+        </div>
+
         <div class="container">
             <div class="row donate-row">
                 <div class="col-sm-12 time">Last update: Aug 30 2022 04:19:28</div>
@@ -60,6 +78,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="static/style/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.4/underscore-umd-min.js"></script>
         <script src="static/style/js/index.js"></script>
     </div>
 
