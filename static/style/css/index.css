@@ -15,6 +15,7 @@ body {
 .card-title {
     font-weight: 700;
     font-size: 1.5em;
+    margin: 0;
 }
 
 .card-label {
@@ -166,6 +167,12 @@ a.custom-card:hover {
 
 .green {
     color: green;
+}
+
+.card-body span, .card-body h6 {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 @media screen and (max-width: 425px) {

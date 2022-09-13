@@ -45,20 +45,23 @@ async function getData(std_cap) {
                         <div class="card-body">
                             <h2 class="card-title">${dataObj[key].symbol}</h2>
 														<span>${dataObj[key].fulldata.name}</span>
-                            <hr>
                             <h5>${dataObj[key].upper_std}</h5>
                             <p>
                             <span ${dataObj[key].hour >= 0 ? `class="green"` : `class="red"`}>1H : ${
         dataObj[key].hour >= 0 ? `+` : ``
-      }${dataObj[key].hour} % </span><br>
+      }${dataObj[key].hour} % </span>
 														<span ${dataObj[key].day >= 0 ? `class="green"` : `class="red"`}>1D : ${dataObj[key].day >= 0 ? `+` : ``}${
         dataObj[key].day
-      } % </span><br>
+      } % </span>
 														<span ${dataObj[key].week >= 0 ? `class="green"` : `class="red"`}>1W : ${dataObj[key].week >= 0 ? `+` : ``}${
         dataObj[key].week
       } % </span>
-														<span>price: $${dataObj[key].fulldata.current_price}</span>
-														<span>Volum 24h: ${nFormatter(dataObj[key].last_24hour_volume.toFixed(0))}</span>
+														<span>price: $${
+                              dataObj[key].fulldata.current_price < 0.001
+                                ? dataObj[key].fulldata.current_price.toFixed(6)
+                                : dataObj[key].fulldata.current_price
+                            }</span>
+														<span>Vol 24h: ${nFormatter(dataObj[key].last_24hour_volume.toFixed(0))}</span>
                             </p>
                         </div>
                     </a>
@@ -78,7 +81,11 @@ async function getData(std_cap) {
                             <h2 class="card-title">${dataObj[key].symbol}</h2>
 														<span>${dataObj[key].fulldata.name}</span>
                             <hr>
-                            <h6>price: $${dataObj[key].fulldata.current_price}</h6>
+                            <h6>price: $${
+                              dataObj[key].fulldata.current_price < 0.001
+                                ? dataObj[key].fulldata.current_price.toFixed(6)
+                                : dataObj[key].fulldata.current_price
+                            }</h6>
 														<span>Vol 24h: ${nFormatter(dataObj[key].last_24hour_volume.toFixed(0))}</span>
                             <h5 class="${dataObj[key].ath_change_percentage < 0 ? 'red' : 'blue'}">${
         dataObj[key].ath_change_percentage
