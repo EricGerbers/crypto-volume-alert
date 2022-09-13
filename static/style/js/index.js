@@ -57,6 +57,7 @@ async function getData(std_cap) {
 														<span ${dataObj[key].week >= 0 ? `class="green"` : `class="red"`}>1W : ${dataObj[key].week >= 0 ? `+` : ``}${
         dataObj[key].week
       } % </span>
+														<span>price: $${dataObj[key].fulldata.current_price}</span>
 														<span>Volum 24h: ${nFormatter(dataObj[key].last_24hour_volume.toFixed(0))}</span>
                             </p>
                         </div>
